@@ -1,0 +1,46 @@
+#ATM using file handling
+import pickle as p
+path='D:\\Downloads\\'
+pin=int(input('enter file name'))
+file=open(path+str(pin)+'.pickle','rb+')
+data=p.load(file)
+amt=data['Amount']
+if file!=None:
+    print('enter \n 1 to withdraw \n 2 to deposit \n 3 to balance 4 to exit \n  0 to create account')
+          
+    option=int(input('enter your choice'))
+    if option ==1:
+          wamt=int(input('enter money to withdraw choice'))
+          if wamt%100==0 and wamt<=amt and wamt>=100:
+              amt=amt-wamt
+              data["Amount"]=amt
+              wfile=open(path+str(pin)+'.txt','wb')
+              print(data)
+              p.dump(data,wfile)
+              wfile.close()
+              file.close()
+              print('amount withdrawn is',wamt)
+          else:
+              print('insufficient funds or invalid amount')
+    elif option==2:
+          damt=int(input('enter deposit amount'))
+          if damt%100==0 and damt>=100:
+              amt = amt+damt
+              data['Amount']=amt
+              wfile=open(path+str(pin)+'.txt','wb')
+              print(data)
+              p.dump(data,wfile)
+              wfile.close()
+              file.close()
+              print('amount deposit  is ',damt)
+          else:
+              print('invalid amount')
+    elif option==3:
+              print('updated balance is',amt)
+    elif option==4:
+       pass
+    elif option ==0:
+        
+          pass
+    else:
+        print('invalid choice')
